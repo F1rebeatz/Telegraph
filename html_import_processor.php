@@ -60,6 +60,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
  */
 function getLinks(string $url): array
 {
+    if (!filter_var($url, FILTER_VALIDATE_URL)) {
+        http_response_code(400);
+        exit();
+    }
+
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $html = curl_exec($ch);

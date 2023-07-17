@@ -28,11 +28,11 @@ if ($requestMethod === 'POST') {
  */
 function processText(string $html): string
 {
-    $links = explode(' ', $html);
-    $links = array_map('trim', $links);
-    $links = array_filter($links, function ($link) {
-        return strpos($link, 'https://') === 0 || strpos($link, 'http://') === 0;
-    });
+    $pattern = '/\bhttps?:\/\/\S+\b/i';
+    preg_match_all($pattern, $html, $matches);
+
+    $links = $matches[0];
+    $links = array_unique($links);
 
     return implode(" ", $links);
 }
