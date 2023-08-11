@@ -18,6 +18,10 @@ class User
         }
     }
 
+    /**
+     * @param array $data
+     * @return void
+     */
     public function create(array $data): void
     {
         $fields = implode(', ', array_keys($data));
@@ -32,6 +36,11 @@ class User
         }
     }
 
+    /**
+     * @param int $id
+     * @param array $data
+     * @return void
+     */
     public function update(int $id, array $data): void
     {
         $fields = [];
@@ -51,6 +60,10 @@ class User
         }
     }
 
+    /**
+     * @param int $id
+     * @return void
+     */
     public function delete(int $id): void
     {
         $sql = "DELETE FROM `users` WHERE `id` = ?";
@@ -62,6 +75,9 @@ class User
         }
     }
 
+    /**
+     * @return array
+     */
     public function list(): array
     {
         $data = $this->connection->query("SELECT * FROM `users`")->fetchAll(PDO::FETCH_ASSOC);
