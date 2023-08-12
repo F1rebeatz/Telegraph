@@ -7,6 +7,12 @@ class User
 {
     protected PDO $connection;
 
+    /**
+     * @param $host
+     * @param $db
+     * @param $dbuser
+     * @param $pass
+     */
     public function __construct($host, $db, $dbuser, $pass)
     {
         $dsn = "mysql:host=$host;dbname=$db;charset=utf8";
