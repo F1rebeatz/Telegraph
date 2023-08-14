@@ -13,7 +13,7 @@ class User
      * @param $dbuser
      * @param $pass
      */
-    public function __construct($host, $db, $dbuser, $pass)
+    public function __construct(string $host, string $db, string $dbuser, string $pass)
     {
         $dsn = "mysql:host=$host;dbname=$db;charset=utf8";
         try {
