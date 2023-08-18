@@ -2,7 +2,7 @@
 define('APP_ENTRY_POINT', true);
 header('Content-Type: text/html; charset=UTF-8');
 require_once 'User.php';
-$config = require_once 'configDB.php';
+$config = require_once 'сonfigDB.php';
 $user = new User($config['host'], $config['db'], $config['dbuser'], $config['pass']);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -59,6 +59,7 @@ $userList = $user->list();
 <h1>User Management</h1>
 <table>
     <tr>
+        <th></th>
         <th>Email</th>
         <th>First Name</th>
         <th>Last Name</th>
