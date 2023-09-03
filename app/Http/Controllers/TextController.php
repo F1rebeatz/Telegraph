@@ -4,21 +4,33 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\TelegraphText;
-use function PHPUnit\Framework\stringContains;
+use Illuminate\View\View;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 
 class TextController extends Controller
 {
-    function index() {
+    /**
+     * @return View
+     */
+    public function index(): View {
         $models = TelegraphText::all();
         return view('models.index', compact('models'));
     }
 
-    function create() {
+    /**
+     * @return View
+     */
+    public function create(): View {
         return view('models.create');
     }
 
-    function store() {
-        $data = request()->validate([
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function store(Request $request): RedirectResponse {
+        $data = $request->validate([
             'title' => 'string',
             'text' => 'string',
             'author' => 'string',
@@ -28,16 +40,29 @@ class TextController extends Controller
         return redirect()->route('models.index');
     }
 
-    function show(TelegraphText $model) {
+    /**
+     * @param TelegraphText $model
+     * @return View
+     */
+    public function show(TelegraphText $model): View {
         return view('models.show', compact('model'));
     }
 
-    function edit(TelegraphText $model) {
+    /**
+     * @param TelegraphText $model
+     * @return View
+     */
+    public function edit(TelegraphText $model): View {
         return view('models.edit', compact('model'));
     }
 
-    function update(TelegraphText $model) {
-        $data = request()->validate([
+    /**
+     * @param Request $request
+     * @param TelegraphText $model
+     * @return RedirectResponse
+     */
+    public function update(Request $request, TelegraphText $model): RedirectResponse {
+        $data = $request->validate([
             'title' => 'string',
             'text' => 'string',
             'author' => 'string',
@@ -47,7 +72,11 @@ class TextController extends Controller
         return redirect()->route('models.show', $model->id);
     }
 
-    function destroy(TelegraphText $model) {
+    /**
+     * @param TelegraphText $model
+     * @return RedirectResponse
+     */
+    public function destroy(TelegraphText $model): RedirectResponse {
         $model->delete();
         return redirect()->route('models.index');
     }
