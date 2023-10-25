@@ -11,14 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('telegraph_text', function (Blueprint $table) {
-            $table->id()->autoIncrement();
+        Schema::create('tags', function (Blueprint $table) {
+            $table->id();
             $table->string('title');
-            $table->string('text');
-            $table->string('author');
-            $table->string('email');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -27,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('telegraph_text');
+        Schema::dropIfExists('tags');
     }
 };

@@ -20,9 +20,32 @@
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email</label>
-                <input type="email" name="email" class="form-control" id="email" placeholder="my_mail@mail.ru" value="{{$model->email}}">
+                <input type="email" name="email" class="form-control" id="email" placeholder="my_mail@mail.ru"
+                       value="{{$model->email}}">
             </div>
-            <button class=" btn btn-outline-primary" type="submit">Update</button>
+            <div class="form-group">
+                <label for="category">Choose category</label>
+                <select class="form-select form-select-sm mb-3" id="category" name="category_id"
+                        aria-label="Small select example">
+                    @foreach($categories as $category)
+                        {{$category->id === $model->category_id ? 'selected': ''}}
+                        <option value="{{$category->id}}">{{$category->title}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="form-group mb-3">
+                <label for="tags[]">Choose tags</label>
+                <select class="form-select" multiple aria-label="Multiple select example" name="tags[]">
+                    @foreach($tags as $tag)
+                        <option
+                            @foreach($model->tags as $modelTag )
+                                {{$tag->id === $modelTag->id ? 'selected': ''}}
+                            @endforeach
+                            value="{{$tag->id}}">{{$tag->title}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <button class="btn btn-outline-primary" type="submit">Update</button>
         </form>
     </div>
 @endsection
